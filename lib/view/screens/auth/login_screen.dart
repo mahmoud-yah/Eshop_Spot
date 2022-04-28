@@ -23,11 +23,11 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyColor,
+          backgroundColor: Get.isDarkMode ? darkGreyColor : Colors.white,
           elevation: 0,
         ),
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                               text: 'LOG',
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
-                              color: Get.isDarkMode ? mainColor : pinkColor,
+                              color: Get.isDarkMode ? pinkColor : mainColor,
                             ),
                             const SizedBox(
                               width: 3,
@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
                               color:
-                                  Get.isDarkMode ? Colors.black : Colors.white,
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                           ],
                         ),
@@ -174,14 +174,27 @@ class LoginScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                                onTap: () {},
+                            GetBuilder<AuthController>(builder: (_) {
+                              return InkWell(
+                                onTap: () {
+                                  controller.facebookSignUpApp();
+                                },
                                 child:
-                                    Image.asset('assets/images/facebook.png')),
+                                    Image.asset('assets/images/facebook.png'),
+                              );
+                            }),
                             const SizedBox(width: 10),
-                            InkWell(
-                                onTap: () {},
-                                child: Image.asset('assets/images/google.png')),
+                            GetBuilder<AuthController>(
+                              builder: (_) {
+                                return InkWell(
+                                  onTap: () {
+                                    controller.googleSignUpApp();
+                                  },
+                                  child:
+                                      Image.asset('assets/images/google.png'),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ],

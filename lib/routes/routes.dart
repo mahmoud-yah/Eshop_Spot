@@ -1,4 +1,6 @@
 import 'package:eshop_spot/logic/bindings/auth_binding.dart';
+import 'package:eshop_spot/logic/bindings/main_binding.dart';
+import 'package:eshop_spot/logic/bindings/product_binding.dart';
 import 'package:eshop_spot/view/screens/auth/forgot_password_screen.dart';
 import 'package:eshop_spot/view/screens/auth/login_screen.dart';
 import 'package:eshop_spot/view/screens/auth/signup_screen.dart';
@@ -6,9 +8,10 @@ import 'package:eshop_spot/view/screens/main_screen.dart';
 import 'package:eshop_spot/view/screens/welcome_screen.dart';
 import 'package:get/get.dart';
 
-class AppRoutes{
+class AppRoutes {
   //initalRoute
   static const welcome = Routes.welcomeScreen;
+  static const mainScreen = Routes.mainScreen;
 
   //getPages
 
@@ -29,20 +32,22 @@ class AppRoutes{
     ),
     GetPage(
       name: Routes.forgotPasswordScreen,
-      page: ()=> ForgotPassword(),
+      page: () => ForgotPassword(),
       binding: AuthBinding(),
     ),
-
     GetPage(
       name: Routes.mainScreen,
-      page: ()=> MainScreen(),
-      binding: AuthBinding(),
+      page: () => MainScreen(),
+      bindings: [
+        AuthBinding(),
+        MainBinding(),
+        ProductBinding(),
+      ],
     ),
-
   ];
 }
 
-class Routes{
+class Routes {
   static const welcomeScreen = '/welcomeScreen';
   static const loginScreen = '/loginScreen';
   static const signUpScreen = '/signUpScreen';

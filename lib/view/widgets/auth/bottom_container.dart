@@ -8,7 +8,11 @@ class BottomContainer extends StatelessWidget {
   final String buttonText;
   final Function() onPressed;
 
-  const BottomContainer({required this.text,required this.buttonText, required this.onPressed, Key? key})
+  const BottomContainer(
+      {required this.text,
+      required this.buttonText,
+      required this.onPressed,
+      Key? key})
       : super(key: key);
 
   @override
@@ -17,7 +21,7 @@ class BottomContainer extends StatelessWidget {
       width: double.infinity,
       height: 80,
       decoration: BoxDecoration(
-        color: Get.isDarkMode? mainColor:pinkColor,
+        color: Get.isDarkMode ? pinkColor : mainColor,
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
@@ -32,7 +36,6 @@ class BottomContainer extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,
-
           ),
           TextButton(
             onPressed: onPressed,

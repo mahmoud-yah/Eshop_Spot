@@ -1,3 +1,4 @@
+import 'package:eshop_spot/logic/controllers/auth_controller.dart';
 import 'package:eshop_spot/utils/my_string.dart';
 import 'package:eshop_spot/utils/theme.dart';
 import 'package:eshop_spot/view/widgets/auth/auth_button.dart';
@@ -11,19 +12,21 @@ class ForgotPassword extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
 
+  final controller = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyColor,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyColor,
+          backgroundColor: Get.isDarkMode ? darkGreyColor : Colors.white,
           centerTitle: true,
           elevation: 0,
           title: Text(
             'Forgot Password',
             style: TextStyle(
-              color: Get.isDarkMode ? mainColor : pinkColor,
+              color: Get.isDarkMode ? pinkColor : mainColor,
             ),
           ),
           leading: IconButton(
@@ -31,7 +34,7 @@ class ForgotPassword extends StatelessWidget {
               Get.back();
             },
             icon: const Icon(Icons.arrow_back),
-            color: Get.isDarkMode ? Colors.black : Colors.white,
+            color: Get.isDarkMode ? Colors.white : Colors.black,
           ),
         ),
         body: Form(
@@ -59,7 +62,7 @@ class ForgotPassword extends StatelessWidget {
                   Text(
                     'If you want to recover your account, then please provide your email below..',
                     style: TextStyle(
-                      color: Get.isDarkMode ? Colors.black : Colors.white,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -79,16 +82,28 @@ class ForgotPassword extends StatelessWidget {
                       }
                     },
                     prefixIcon: Get.isDarkMode
-                        ? Image.asset('assets/images/email.png')
-                        : const Icon(
+                        ? const Icon(
                             Icons.email,
                             color: pinkColor,
                             size: 30,
-                          ),
+                          )
+                        : Image.asset('assets/images/email.png'),
                     hintText: 'Email',
                   ),
                   const SizedBox(height: 50),
-                  AuthButton(text: 'Send', onPressed: () {}),
+                  GetBuilder<AuthController>(
+                    builder: (_) {
+                      return AuthButton(
+                          text: 'Send',
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              String email = emailController.text.trim();
+                              controller.resetPassword(email);
+                              print('done');
+                            }
+                          });
+                    },
+                  ),
                 ],
               ),
             ),
