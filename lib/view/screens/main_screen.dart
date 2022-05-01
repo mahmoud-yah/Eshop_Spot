@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
+import 'package:eshop_spot/logic/controllers/cart_controller.dart';
 import 'package:eshop_spot/logic/controllers/main_controller.dart';
+import 'package:eshop_spot/routes/routes.dart';
 import 'package:eshop_spot/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +10,7 @@ class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
 
   final controller = Get.find<MainController>();
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +21,28 @@ class MainScreen extends StatelessWidget {
             appBar: AppBar(
               leading: Container(),
               actions: [
-                IconButton(
-                  onPressed: () {
-                    Get.isDarkMode
-                        ? Get.changeThemeMode(ThemeMode.light)
-                        : Get.changeThemeMode(ThemeMode.dark);
-                  },
-                  icon: Image.asset('assets/images/shop.png'),
+                Badge(
+                  position: BadgePosition.topEnd(top: 0, end: 3),
+                  animationDuration: const Duration(milliseconds: 300),
+                  animationType: BadgeAnimationType.slide,
+                  badgeContent: Text(
+                    cartController.productsMap.values.length.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.cartScreen);
+                    },
+                    icon: const Icon(Icons.shopping_cart),
+                  ),
                 ),
+
+                // IconButton(
+                //   onPressed: () {
+                //     Get.toNamed(Routes.cartScreen);
+                //   },
+                //   icon: Image.asset('assets/images/shop.png'),
+                // ),
               ],
               title: Text(
                 controller.titles[controller.currentIndex.value],

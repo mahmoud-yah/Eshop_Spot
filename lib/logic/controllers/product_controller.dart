@@ -1,5 +1,6 @@
 import 'package:eshop_spot/models/product_model.dart';
 import 'package:eshop_spot/services/product_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,6 +10,9 @@ class ProductController extends GetxController {
   var isLoading = true.obs;
   String key = 'isFavorite';
   var storage = GetStorage();
+
+  var searchList = <ProductModel>[].obs;
+  TextEditingController searchTextController = TextEditingController();
 
   @override
   void onInit() {
@@ -52,5 +56,20 @@ class ProductController extends GetxController {
 
   bool isFavorite(int productId) {
     return favoritesList.any((element) => element.id == productId);
+  }
+
+  void addSearchToList(String productName) {
+    String productNameToLower = productName.toLowerCase();
+    searchList.value = productsList.where((product) {
+      return product.title.toLowerCase().contains(productNameToLower) ||
+          product.price.toString().toLowerCase().contains(productNameToLower);
+    }).toList();
+
+    update();
+  }
+
+  void clearSearch() {
+    searchTextController.clear();
+    addSearchToList('');
   }
 }
