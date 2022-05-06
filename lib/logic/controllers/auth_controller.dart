@@ -12,8 +12,9 @@ class AuthController extends GetxController {
   bool isVisible = false;
   bool isCheckBox = false;
 
-  var displayUsername = '';
-  var displayUserImage = '';
+  var displayUsername = ''.obs;
+  var displayUserImage = ''.obs;
+  var displayUserEmail = ''.obs;
   var googleSignIn = GoogleSignIn();
   FacebookModel? facebookModel;
 
@@ -23,7 +24,22 @@ class AuthController extends GetxController {
 
   final GetStorage authBox = GetStorage();
 
-  void visibilty() {
+  User? get currentUser => auth.currentUser;
+
+  @override
+  void onInit() {
+    super.onInit();
+    displayUsername.value =
+        (currentUser != null ? currentUser!.displayName : '')!;
+
+    displayUserImage.value =
+    (currentUser != null ? currentUser!.photoURL : '')!;
+
+    displayUserEmail.value =
+    (currentUser != null ? currentUser!.email : '')!;
+  }
+
+  void visibility() {
     isVisible = !isVisible;
 
     update();
@@ -44,8 +60,8 @@ class AuthController extends GetxController {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUsername = name;
-        auth.currentUser!.updateDisplayName(displayUsername);
+        displayUsername.value = name;
+        auth.currentUser!.updateDisplayName(displayUsername.value);
       });
 
       update();
@@ -86,7 +102,8 @@ class AuthController extends GetxController {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => displayUsername = auth.currentUser!.displayName!);
+          .then((value) =>
+              displayUsername.value = auth.currentUser!.displayName!);
 
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
@@ -125,8 +142,17 @@ class AuthController extends GetxController {
   Future<void> googleSignUpApp() async {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      displayUsername = googleUser!.displayName!;
-      displayUserImage = googleUser.photoUrl!;
+      displayUsername.value = googleUser!.displayName!;
+      displayUserImage.value = googleUser.photoUrl!;
+      displayUserEmail.value = googleUser.email;
+
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+
+      await auth.signInWithCredential(credential);
 
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
@@ -150,8 +176,8 @@ class AuthController extends GetxController {
       var data = await FacebookAuth.instance.getUserData();
       facebookModel = FacebookModel.fromJson(data);
 
-      print(facebookModel!.name);
-      print(facebookModel!.email);
+      // print(facebookModel!.name);
+      // print(facebookModel!.email);
 
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
@@ -200,8 +226,9 @@ class AuthController extends GetxController {
       await auth.signOut();
       await googleSignIn.signOut();
       await FacebookAuth.i.logOut();
-      displayUsername='';
-      displayUserImage='';
+      displayUsername.value = '';
+      displayUserImage.value = '';
+      displayUserEmail.value = '';
       isSignedIn = false;
       authBox.remove('auth');
       update();

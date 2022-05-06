@@ -1,5 +1,7 @@
+import 'package:eshop_spot/language/localiztion.dart';
 import 'package:eshop_spot/logic/controllers/theme_controller.dart';
 import 'package:eshop_spot/routes/routes.dart';
+import 'package:eshop_spot/utils/my_string.dart';
 import 'package:eshop_spot/utils/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Eshop Spot',
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      fallbackLocale: Locale(ene),
+      translations: LocaliztionApp(),
       theme: ThemesApp.light,
       darkTheme: ThemesApp.dark,
       themeMode: ThemeController().themeDataGet,

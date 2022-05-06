@@ -7,6 +7,7 @@ import 'package:eshop_spot/view/screens/auth/login_screen.dart';
 import 'package:eshop_spot/view/screens/auth/signup_screen.dart';
 import 'package:eshop_spot/view/screens/cart_screen.dart';
 import 'package:eshop_spot/view/screens/main_screen.dart';
+import 'package:eshop_spot/view/screens/payment_screen.dart';
 import 'package:eshop_spot/view/screens/welcome_screen.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +55,15 @@ class AppRoutes {
         AuthBinding(),
       ],
     ),
+    GetPage(
+      name: Routes.paymentScreen,
+      page: () => PaymentScreen(),
+      bindings: [
+        AuthBinding(),
+        MainBinding(),
+        ProductBinding(),
+      ],
+    ),
   ];
 }
 
@@ -64,4 +74,5 @@ class Routes {
   static const forgotPasswordScreen = '/forgotPasswordScreen';
   static const mainScreen = '/mainScreen';
   static const cartScreen = '/cartScreen';
+  static const paymentScreen = '/paymentScreen';
 }

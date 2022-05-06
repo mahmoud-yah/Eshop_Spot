@@ -112,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                               obscureText: controller.isVisible ? false : true,
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  controller.visibilty();
+                                  controller.visibility();
                                 },
                                 icon: controller.isVisible
                                     ? const Icon(

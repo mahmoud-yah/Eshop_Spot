@@ -1,4 +1,5 @@
 import 'package:eshop_spot/logic/controllers/cart_controller.dart';
+import 'package:eshop_spot/routes/routes.dart';
 import 'package:eshop_spot/utils/theme.dart';
 import 'package:eshop_spot/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class CartTotal extends StatelessWidget {
       padding: const EdgeInsets.all(25),
       child: Row(
         children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TextUtils(
                 text: 'Total',
@@ -38,7 +40,9 @@ class CartTotal extends StatelessWidget {
             child: SizedBox(
               height: 60,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.paymentScreen);
+                },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

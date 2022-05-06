@@ -8,6 +8,11 @@ const Color kColor2 = Color(0xffADA79B);
 const Color kColor3 = Color(0xffA5947F);
 const Color kColor4 = Color(0xff738B71);
 const Color kColor5 = Color(0xff6D454D);
+const Color darkSettings = Color(0xff6132e4);
+const Color accountSettings = Color(0xff73bc65);
+const Color logOutSettings = Color(0xff5f95ef);
+const Color notificationSettings = Color(0xffdf5862);
+const Color languageSettings = Color(0xffCB256C);
 
 class ThemesApp{
   static final light = ThemeData(
