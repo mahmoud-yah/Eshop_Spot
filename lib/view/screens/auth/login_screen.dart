@@ -79,12 +79,12 @@ class LoginScreen extends StatelessWidget {
                             }
                           },
                           prefixIcon: Get.isDarkMode
-                              ? Image.asset('assets/images/email.png')
-                              : const Icon(
+                              ? const Icon(
                                   Icons.email,
                                   color: pinkColor,
                                   size: 30,
-                                ),
+                                )
+                              : Image.asset('assets/images/email.png'),
                           hintText: 'Email',
                         ),
                         const SizedBox(
@@ -102,12 +102,12 @@ class LoginScreen extends StatelessWidget {
                                 }
                               },
                               prefixIcon: Get.isDarkMode
-                                  ? Image.asset('assets/images/lock.png')
-                                  : const Icon(
+                                  ? const Icon(
                                       Icons.lock,
                                       color: pinkColor,
                                       size: 30,
-                                    ),
+                                    )
+                                  : Image.asset('assets/images/lock.png'),
                               hintText: 'Password',
                               obscureText: controller.isVisible ? false : true,
                               suffixIcon: IconButton(
@@ -139,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
                               color:
-                                  Get.isDarkMode ? Colors.black : Colors.white,
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                           ),
                         ),

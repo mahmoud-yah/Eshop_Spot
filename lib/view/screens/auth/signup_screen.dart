@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                               text: 'SIGN',
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
-                              color: Get.isDarkMode ? mainColor : pinkColor,
+                              color: Get.isDarkMode ? pinkColor : mainColor,
                             ),
                             const SizedBox(
                               width: 3,
@@ -63,7 +63,7 @@ class SignUpScreen extends StatelessWidget {
                               fontSize: 28,
                               fontWeight: FontWeight.w500,
                               color:
-                                  Get.isDarkMode ? Colors.black : Colors.white,
+                                  Get.isDarkMode ? Colors.white : Colors.black,
                             ),
                           ],
                         ),
@@ -79,12 +79,12 @@ class SignUpScreen extends StatelessWidget {
                             }
                           },
                           prefixIcon: Get.isDarkMode
-                              ? Image.asset('assets/images/user.png')
-                              : const Icon(
+                              ? const Icon(
                                   Icons.person,
                                   color: pinkColor,
                                   size: 30,
-                                ),
+                                )
+                              : Image.asset('assets/images/user.png'),
                           hintText: 'User Name',
                         ),
                         const SizedBox(
@@ -100,11 +100,15 @@ class SignUpScreen extends StatelessWidget {
                             }
                           },
                           prefixIcon: Get.isDarkMode
-                              ? Image.asset('assets/images/email.png')
-                              : const Icon(
+                              ? const Icon(
                                   Icons.email,
                                   color: pinkColor,
                                   size: 30,
+                                )
+                              // : Image.asset('assets/images/email.png'),
+                              : const Icon(
+                                  Icons.email,
+                                  color: mainColor,
                                 ),
                           hintText: 'Email',
                         ),
@@ -123,12 +127,12 @@ class SignUpScreen extends StatelessWidget {
                                 }
                               },
                               prefixIcon: Get.isDarkMode
-                                  ? Image.asset('assets/images/lock.png')
-                                  : const Icon(
+                                  ? const Icon(
                                       Icons.lock,
                                       color: pinkColor,
                                       size: 30,
-                                    ),
+                                    )
+                                  : Image.asset('assets/images/lock.png'),
                               hintText: 'Password',
                               obscureText: controller.isVisible ? false : true,
                               suffixIcon: IconButton(

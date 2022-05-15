@@ -33,10 +33,9 @@ class AuthController extends GetxController {
         (currentUser != null ? currentUser!.displayName : '')!;
 
     displayUserImage.value =
-    (currentUser != null ? currentUser!.photoURL : '')!;
+        (currentUser != null ? currentUser!.photoURL : '')!;
 
-    displayUserEmail.value =
-    (currentUser != null ? currentUser!.email : '')!;
+    displayUserEmail.value = (currentUser != null ? currentUser!.email : '')!;
   }
 
   void visibility() {
